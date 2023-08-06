@@ -1,7 +1,6 @@
 import streamlit as st
 import pickle
 import pandas as pd
-<<<<<<< HEAD
 import requests
 
 intial_count = 6
@@ -11,13 +10,10 @@ def get_posters(movie_id):
     data = res.json()
     img_url = "https://image.tmdb.org/t/p/w500/" + data['poster_path']
     return img_url
-=======
->>>>>>> d78909844676108e2b62c6a0c51265f450bf3975
 
 def recommend(movie):
     movie_index = movies[movies['original_title'] == movie].index[0]
     # distances = similarity[movie_index]
-<<<<<<< HEAD
     movie_list = sorted(list(enumerate(similarity[movie_index])), reverse=True, key=lambda x: x[1])[1:intial_count+1]
     recommended_movie_names = []
     movie_pics = []
@@ -33,7 +29,6 @@ def recommend(movie):
     recommended_movie_names =  sorted(recommended_movie_names,reverse=True,key=lambda x:x[1])
     movie_pics = sorted(movie_pics, reverse=True, key= lambda x:x[0])
     return recommended_movie_names, movie_pics
-=======
     movie_list = sorted(list(enumerate(similarity[movie_index])), reverse=True, key=lambda x: x[1])[1:8]
 
     recommended_movie_names = []
@@ -41,7 +36,6 @@ def recommend(movie):
         recommended_movie_names.append(movies.iloc[i[0]].original_title)
 
     return recommended_movie_names
->>>>>>> d78909844676108e2b62c6a0c51265f450bf3975
 
 movies_dict = pickle.load(open('movie_list.pkl','rb'))
 movies = pd.DataFrame(movies_dict)
@@ -51,7 +45,6 @@ similarity = pickle.load(open('similarity.pkl','rb'))
 st.title("Movie Recommender System")
 
 selected_movie_name = st.selectbox(
-<<<<<<< HEAD
     'Select a Movie',
     movies['original_title'].values)
 
@@ -73,13 +66,6 @@ if st.button('Find Similar Movies'):
             st.subheader(recommendations[count][0]+" ({})".format(recommendations[i+0][1]))
             count+=1
 
-=======
-    'How would you like to be contacted?',
-    movies['original_title'].values)
 
-if st.button('Recommend'):
-    recommendations = recommend(selected_movie_name)
-    for i in recommendations:
-        st.write(i)
->>>>>>> d78909844676108e2b62c6a0c51265f450bf3975
+
 
